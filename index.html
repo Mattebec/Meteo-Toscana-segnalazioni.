@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meteo Toscana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #a5c9f1, #e6f0fa);
+      color: #1a1a1a;
+      padding: 20px;
+      margin: 0;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      max-width: 1200px;
+      margin-inline: auto;
+    }
+    .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #004080;
+      margin: 0;
+    }
+    h2 {
+      color: #003366;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin-inline: auto;
+    }
+    section {
+      background-color: #ffffffcc;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .button {
+      display: inline-block;
+      background-color: #0077cc;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-top: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .button:hover {
+      background-color: #005fa3;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+    .row > section {
+      flex: 1 1 48%;
+    }
+    .news-box {
+      background-color: #ffffffcc;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .news-box h3 {
+      margin-top: 0;
+      color: #003366;
+    }
+    .news-item {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.jpg" alt="Logo Meteo Toscana" class="logo">
+    <h1>Meteo Toscana</h1>
+  </header>
+
+  <div class="grid">
+    <section>
+      <h2>🟡 Allerta attiva</h2>
+      <p>Codice giallo per piogge forti e rischio idraulico. molto nuvoloso con piogge diffuse nella notte e nelle prime ore della mattina, più sparse nelle ore successive. Variabile e localmente instabile nel pomeriggio con possibilità di rovesci e temporali sparsi. Piogge più isolate in serata.</p>
+    </section>
+
+    <section>
+      <h2>🗕 Previsioni aggiornate</h2>
+      <p><strong id="data-oggi"></strong></p>
+      <p id="meteo-toscana">Caricamento previsioni meteo...</p>
+    </section>
+
+    <section>
+      <h2>📊 Grafici meteo</h2>
+      <p>Visualizza l'andamento previsto di piogge, temperature e vento nei prossimi giorni cliccando qui sotto:</p>
+      <a class="button" href="https://www.meteologix.com/it/model-charts/superhd/toscana/precipitation/202404151200.html" target="_blank">Apri grafico Meteologix</a>
+    </section>
+  </div>
+
+  <div class="row">
+    <section>
+      <h2>📜 Mappa Meteo Interattiva</h2>
+      <p>Consulta in tempo reale le condizioni meteo su tutta la Toscana grazie alla mappa interattiva Windy.</p>
+      <iframe src="https://embed.windy.com/embed2.html?lat=43.77&lon=11.25&detailLat=43.77&detailLon=11.25&width=650&height=450&zoom=7&level=surface&overlay=rain"></iframe>
+    </section>
+
+    <section>
+      <div class="news-box">
+        <h3>🔔 Ultime Notizie Meteo</h3>
+        <div class="news-item">
+          <strong>15 Aprile:</strong> Resta attivo il codice giallo per rischio idraulico e piogge intense.
+        </div>
+        <div class="news-item">
+          <strong>Mercoledì:</strong> Possibile nuovo peggioramento in arrivo con temporali sparsi.
+        </div>
+        <div class="news-item">
+          <strong>Consiglio:</strong> Evitare spostamenti in zone collinari durante i picchi di pioggia.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="grid">
+    <section>
+      <h2>🔔 Ultime allerte</h2>
+      <p>Consulta le allerte aggiornate della Protezione Civile Toscana cliccando qui:</p>
+      <a class="button" href="https://www.regione.toscana.it/allertameteo" target="_blank">Vai alle allerte</a>
+    </section>
+
+    <section>
+      <h2>🔗 Link utili</h2>
+      <ul>
+        <li><a href="https://www.lamma.toscana.it" target="_blank">Consorzio Lamma Toscana</a></li>
+        <li><a href="https://www.windy.com" target="_blank">Windy - Mappe meteo live</a></li>
+        <li><a href="https://meteologix.com/it/" target="_blank">Meteologix - Previsioni avanzate</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📲 Seguici sui social</h2>
+      <p><a href="https://www.instagram.com/meteotoscana_segnalazioni" target="_blank">Instagram</a></p>
+      <p><a href="https://www.facebook.com/MeteoToscanasegnalazioni" target="_blank">Facebook</a></p>
+    </section>
+  </div>
+
+  <script>
+    // Data aggiornata
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    document.getElementById("data-oggi").textContent = `Previsioni aggiornate: ${day}/${month}/${year}`;
+
+    // Meteo Toscana da OpenWeather
+    fetch('https://api.openweathermap.org/data/2.5/weather?lat=43.5&lon=11.2&appid=19dc6152bc70b08915509b1f10473862&lang=it&units=metric')
+      .then(response => response.json())
+      .then(data => {
+        const descrizione = data.weather[0].description;
+        const temperatura = data.main.temp.toFixed(1);
+        const umidita = data.main.humidity;
+        const vento = data.wind.speed;
+        document.getElementById("meteo-toscana").innerHTML = `
+          <strong>Condizioni attuali:</strong> ${descrizione}<br>
+          <strong>Temperatura:</strong> ${temperatura}°C<br>
+          <strong>Umidità:</strong> ${umidita}%<br>
+          <strong>Vento:</strong> ${vento} m/s
+        `;
+      })
+      .catch(error => {
+        console.error("Errore nel caricamento del meteo:", error);
+        document.getElementById("meteo-toscana").textContent = "Errore nel caricamento delle previsioni meteo.";
+      });
+  </script>
+</body>
+</html>
