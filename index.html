@@ -108,13 +108,13 @@
   <div class="grid">
     <section>
       <h2>🟡 Allerta attiva</h2>
-      <p>Codice giallo per piogge forti e rischio idraulico. molto nuvoloso con piogge diffuse nella notte e nelle prime ore della mattina, più sparse nelle ore successive. Variabile e localmente instabile nel pomeriggio con possibilità di rovesci e temporali sparsi. Piogge più isolate in serata.</p>
+      <p>Codice giallo per piogge forti e rischio idraulico. Molto nuvoloso con piogge diffuse nella notte e nelle prime ore della mattina, più sparse nelle ore successive. Variabile e localmente instabile nel pomeriggio con possibilità di rovesci e temporali sparsi. Piogge più isolate in serata.</p>
     </section>
 
     <section>
       <h2>🗕 Previsioni aggiornate</h2>
-      <p><strong id="data-oggi"></strong></p> <!-- La data verrà aggiornata automaticamente -->
-      <p><strong>Prossimi giorni:</strong> Instabilità persistente, possibile nuovo peggioramento mercoledì.</p>
+      <p><strong id="data-oggi"></strong></p>
+      <p id="meteo-riassunto">Caricamento in corso...</p>
     </section>
 
     <section>
@@ -171,15 +171,39 @@
   </div>
 
   <script>
-    // Funzione per ottenere la data attuale
+    const apiKey = "19dc6152bc70b08915509b1f10473862";
+    const lat = 43.4712;
+    const lon = 11.0436;
+
     const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth() + 1; // I mesi partono da 0
-    const year = today.getFullYear();
+    const formattedDate = `Previsioni aggiornate: ${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+    document.getElementById("data-oggi").textContent = formattedDate;
 
-    const dateString = `Previsioni aggiornate: ${day}/${month}/${year}`;
-    document.getElementById("data-oggi").textContent = dateString;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=it`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("Dati meteo ricevuti:", data);
+        if (data.cod !== 200) {
+          throw new Error(data.message || "Errore generico");
+        }
+
+        const descrizione = data.weather[0].description;
+        const temp = Math.round(data.main.temp);
+        const vento = Math.round(data.wind.speed);
+        const icona = data.weather[0].icon;
+        const iconUrl = `https://openweathermap.org/img/wn/${icona}@2x.png`;
+
+        document.getElementById("meteo-riassunto").innerHTML = `
+          <img src="${iconUrl}" alt="${descrizione}" style="vertical-align: middle; width: 40px;">
+          <strong>${descrizione.charAt(0).toUpperCase() + descrizione.slice(1)}</strong><br>
+          Temperatura attuale: ${temp}°C<br>
+          Vento: ${vento} m/s
+        `;
+      })
+      .catch(error => {
+        console.error("Errore nel recupero dati meteo:", error);
+        document.getElementById("meteo-riassunto").textContent = "Errore nel caricamento del meteo.";
+      });
   </script>
-
 </body>
 </html>
